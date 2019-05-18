@@ -37,6 +37,9 @@ console.log(uniqueCityValues);
 console.log(uniqueCountryValues);
 console.log(uniqueShapeValues);
 
+// credit to https://stackoverflow.com/questions/31831651/javascript-filter-array-multiple-conditions
+//users = users.filter(obj => obj.name == filter.name && obj.address == filter.address)
+
 d3.select("#filter-btn").on("click",filterdata);
 
 
