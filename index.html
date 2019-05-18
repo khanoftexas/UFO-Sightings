@@ -51,7 +51,23 @@
           <div id="table-area" class="">
             <table id="ufo-table" class="table table-striped">
               <thead>
+                <tr>
+                  <th><input type="text" class="form-control" id="datetime" placeholder="1/11/2011"></th>
+                  <th><input type="text" class="form-control" id="city" placeholder="Dallas"></th>
+                  <th><input type="text" class="form-control" id="state" placeholder="TX"></th>
+                  <!-- <th>
+                      <div class="form-group">
+                          <select class="form-control" id="country">
+                            <option selected>US</option>
+                            <option>CA</option>
+                           </select>
+                        </div>
+                  </th> -->
+                  <th><input type="text" class="form-control" id="country" placeholder="US"></th>
+                  <th><input type="text" class="form-control" id="shape" placeholder="Circle"></th>
+                  <th colspan="2"><button id="filter-btn" type="submit" class="btn btn-success btn-block btn-md">Filter Table</button></th>
                   
+                </tr>  
                 
                 <tr>
                   <th class="table-head">Date</th>
@@ -62,15 +78,7 @@
                   <th class="table-head">Duration</th>
                   <th class="table-head">Comments</th>
                 </tr>
-                <tr>
-                    <th><input type="text" class="form-control" id="datetime" placeholder="1/11/2011"></th>
-                    <th><input type="text" class="form-control" id="city" placeholder="Dallas"></th>
-                    <th><input type="text" class="form-control" id="state" placeholder="TX"></th>
-                    <th><input type="text" class="form-control" id="country" placeholder="US"></th>
-                    <th><input type="text" class="form-control" id="shape" placeholder="Circle"></th>
-                    <th colspan="2"><button id="filter-btn" type="submit" class="btn btn-success btn-block btn-md">Filter Table</button></th>
-                    
-                  </tr>
+                
               </thead>
               <tbody></tbody>
             </table>
