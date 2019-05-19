@@ -224,3 +224,16 @@ select {
     opacity: 1;
   }
 }
+/* credit https://stackoverflow.com/questions/39361216/how-do-i-change-placeholder-font-size-for-bootstrap-and-bootstrap-material-desig */
+/* Overriding styles */
+
+::-webkit-input-placeholder {
+  font-size: 13px!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+     font-size: 13px!important;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+     font-size: 13px!important;
+}

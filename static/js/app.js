@@ -67,15 +67,89 @@ function filterdata(){
     // Clear all data
     d3.select("tbody").html("");
 
-    // Select the input element and get the raw HTML node
-    var inputElement = d3.select("#datetime");
-
-    // Get the value property of the input element
-    var inputValue = inputElement.property("value");
+    let filtercondition= {};
     
-    var filteredData = ufoData.filter(ufoData => ufoData.datetime === inputValue);
+    
 
-    filteredData.forEach((datedata) => {
+    // // Select the input element and get the raw HTML node
+    // var inputElement = d3.select("#datetime");
+
+    // // Get the value property of the input element
+    // var inputValue = inputElement.property("value");
+
+    // if (inputValue != ""){
+    //   filtercondition["datetime"]=inputValue;
+    // }
+    // var inputElement = d3.select("#city");
+
+    // // Get the value property of the input element
+    // var inputValue = inputElement.property("value");
+
+    // if (inputValue != ""){
+    //   filtercondition["city"]=inputValue;
+    // }
+
+    // credit https://stackoverflow.com/questions/41626302/javascript-multiple-condition-array-filter?rq=1
+    // Get the value property of the input element for date
+    var dateinputvalue =d3.select("#datetime").property("value");
+    if (dateinputvalue != ""){
+      filtercondition["datetime"]=dateinputvalue;
+    }
+     // Get the value property of the input element for city
+    var cityinputvalue =d3.select("#city").property("value");
+    if (cityinputvalue != ""){
+      filtercondition["city"]=cityinputvalue;
+    }
+    // Get the value property of the input element for state
+    var stateinputvalue =d3.select("#state").property("value");
+    if (stateinputvalue != ""){
+       filtercondition["state"]=stateinputvalue;
+    }
+    // Get the value property of the input element for country
+    var countryinputvalue =d3.select("#country").property("value");
+    if (countryinputvalue != ""){
+       filtercondition["country"]=countryinputvalue;
+    }
+    // Get the value property of the input element for shape
+    var shapeinputvalue =d3.select("#shape").property("value");
+    if (shapeinputvalue != ""){
+       filtercondition["shape"]=shapeinputvalue;
+    }
+
+
+
+
+    console.log(filtercondition);
+    let filterData = (array, filter) => {
+
+      return array.filter( (item) => {
+    
+          /* here, we iterate each item and compare with your filter,
+             if the item pass, you must return true. Otherwise, false */ 
+    
+          /* e.g.: datetime, city, state, country, shape check (if present only) */
+          if (filter.datetime && filter.datetime !== item.datetime) {
+              return false;
+          }
+          if (filter.city && filter.city !== item.city) {
+            return false;
+          }
+          if (filter.state && filter.state !== item.state) {
+            return false;
+          }
+          if (filter.country && filter.country !== item.country) {
+            return false;
+          }
+          if (filter.shape && filter.shape !== item.shape) {
+            return false;
+          }
+      
+          return true;
+    })
+    }
+    let dataFiltered = filterData(ufoData, filtercondition);
+    console.log(dataFiltered);
+    dataFiltered.forEach((datedata) => {
 
         var row = tbody.append("tr");
         
@@ -84,9 +158,39 @@ function filterdata(){
             row.append("td").text(value);
             
         })
-    });
+      });
+    
+    // var filteredData = ufoData.filter(ufoData => ufoData.datetime === inputValue);
 
+    // filteredData.forEach((datedata) => {
+
+    //     var row = tbody.append("tr");
+        
+    //     Object.values(datedata).forEach((value) => {
+
+    //         row.append("td").text(value);
+            
+    //     })
+    // });
+    // var filtered = ufoData.filter(function(obj) {
+    //   for (var key in filtercondition) {
+    //     console.log(key);
+    //   //   filtered.forEach((alldata) => {
+
+    //   //     var row = tbody.append("tr");
+          
+    //   //     Object.values(alldata).forEach((value) => {
+  
+    //   //         row.append("td").text(value);
+              
+    //   //     })
+    //   //  });
+    //   }
+
+    //   return true;
+    //   });
+     
+      
 };
 
 
-  
