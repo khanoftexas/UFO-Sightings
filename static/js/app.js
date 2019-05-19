@@ -98,22 +98,22 @@ function filterdata(){
      // Get the value property of the input element for city
     var cityinputvalue =d3.select("#city").property("value");
     if (cityinputvalue != ""){
-      filtercondition["city"]=cityinputvalue;
+      filtercondition["city"]=cityinputvalue.toLowerCase();
     }
     // Get the value property of the input element for state
     var stateinputvalue =d3.select("#state").property("value");
     if (stateinputvalue != ""){
-       filtercondition["state"]=stateinputvalue;
+       filtercondition["state"]=stateinputvalue.toLowerCase();
     }
     // Get the value property of the input element for country
     var countryinputvalue =d3.select("#country").property("value");
     if (countryinputvalue != ""){
-       filtercondition["country"]=countryinputvalue;
+       filtercondition["country"]=countryinputvalue.toLowerCase();
     }
     // Get the value property of the input element for shape
     var shapeinputvalue =d3.select("#shape").property("value");
     if (shapeinputvalue != ""){
-       filtercondition["shape"]=shapeinputvalue;
+       filtercondition["shape"]=shapeinputvalue.toLowerCase();
     }
 
 
