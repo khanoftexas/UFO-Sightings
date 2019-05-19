@@ -1,7 +1,8 @@
 // from data.js
 var ufoData = data;
+var tbody = d3.select("tbody");
 
-
+/** After the fact adding some data */
 function adddata(){
 dataadded =     {
   datetime: "1/28/1996",
@@ -16,36 +17,34 @@ dataadded =     {
 ufoData.splice(2,0,dataadded);
 }
 
-var tbody = d3.select("tbody");
-// var submit = d3.select("#filter-btn");
-
 //Add the data and show the table first time
 adddata();
-showTable();
+showTable(ufoData);
 
-// credit to https://stackoverflow.com/questions/33118036/how-to-get-distinct-values-in-d3-js
-function unique(x) {
-  return x.reverse().filter(function (e, i, x) {return x.indexOf(e, i+1) === -1;}).reverse();
-}
+// Wanted to do dropdown lists for search will re-visit
+// // credit to https://stackoverflow.com/questions/33118036/how-to-get-distinct-values-in-d3-js
+// function unique(x) {
+//   return x.reverse().filter(function (e, i, x) {return x.indexOf(e, i+1) === -1;}).reverse();
+// }
   
-var uniqueStateValues = unique(ufoData.map(function(d){return d.state}))
-var uniqueCityValues = unique(ufoData.map(function(d){return d.city}))
-var uniqueCountryValues = unique(ufoData.map(function(d){return d.country}))
-var uniqueShapeValues = unique(ufoData.map(function(d){return d.shape}))
-console.log(uniqueStateValues);
-console.log(uniqueCityValues);
-console.log(uniqueCountryValues);
-console.log(uniqueShapeValues);
-
-// credit to https://stackoverflow.com/questions/31831651/javascript-filter-array-multiple-conditions
-//users = users.filter(obj => obj.name == filter.name && obj.address == filter.address)
+// var uniqueStateValues = unique(ufoData.map(function(d){return d.state}))
+// var uniqueCityValues = unique(ufoData.map(function(d){return d.city}))
+// var uniqueCountryValues = unique(ufoData.map(function(d){return d.country}))
+// var uniqueShapeValues = unique(ufoData.map(function(d){return d.shape}))
+// console.log(uniqueStateValues);
+// console.log(uniqueCityValues);
+// console.log(uniqueCountryValues);
+// console.log(uniqueShapeValues);
 
 d3.select("#filter-btn").on("click",filterdata);
 
-
-function showTable() {
+/**  Clears tbody and writes all <tr><td>values</td></tr>
+ * 
+ * @param {obj} data 
+ */
+function showTable(data) {
     d3.select("tbody").html("");
-    ufoData.forEach((ufoSighting) => {
+    data.forEach((ufoSighting) => {
 
         var row = tbody.append("tr");
       
@@ -59,7 +58,7 @@ function showTable() {
 
   // Select the submit button
 
-
+/** filtering data on the basis of Date, city, state, country, shape*/
 function filterdata(){
 
     // Prevent the page from refreshing
@@ -67,29 +66,10 @@ function filterdata(){
     // Clear all data
     d3.select("tbody").html("");
 
+       // credit https://stackoverflow.com/questions/41626302/javascript-multiple-condition-array-filter?rq=1
+    // creating filtercondition object for all the searches
     let filtercondition= {};
-    
-    
-
-    // // Select the input element and get the raw HTML node
-    // var inputElement = d3.select("#datetime");
-
-    // // Get the value property of the input element
-    // var inputValue = inputElement.property("value");
-
-    // if (inputValue != ""){
-    //   filtercondition["datetime"]=inputValue;
-    // }
-    // var inputElement = d3.select("#city");
-
-    // // Get the value property of the input element
-    // var inputValue = inputElement.property("value");
-
-    // if (inputValue != ""){
-    //   filtercondition["city"]=inputValue;
-    // }
-
-    // credit https://stackoverflow.com/questions/41626302/javascript-multiple-condition-array-filter?rq=1
+      
     // Get the value property of the input element for date
     var dateinputvalue =d3.select("#datetime").property("value");
     if (dateinputvalue != ""){
@@ -115,10 +95,6 @@ function filterdata(){
     if (shapeinputvalue != ""){
        filtercondition["shape"]=shapeinputvalue.toLowerCase();
     }
-
-
-
-
     console.log(filtercondition);
     let filterData = (array, filter) => {
 
@@ -149,17 +125,16 @@ function filterdata(){
     }
     let dataFiltered = filterData(ufoData, filtercondition);
     console.log(dataFiltered);
-    dataFiltered.forEach((datedata) => {
+    showTable(dataFiltered);
+  }; 
 
-        var row = tbody.append("tr");
-        
-        Object.values(datedata).forEach((value) => {
+// old working code  for date only
 
-            row.append("td").text(value);
-            
-        })
-      });
-    
+    // // Select the input element and get the raw HTML node
+    // var inputElement = d3.select("#datetime");
+
+    // // Get the value property of the input element
+    // var inputValue = inputElement.property("value");
     // var filteredData = ufoData.filter(ufoData => ufoData.datetime === inputValue);
 
     // filteredData.forEach((datedata) => {
@@ -171,26 +146,4 @@ function filterdata(){
     //         row.append("td").text(value);
             
     //     })
-    // });
-    // var filtered = ufoData.filter(function(obj) {
-    //   for (var key in filtercondition) {
-    //     console.log(key);
-    //   //   filtered.forEach((alldata) => {
-
-    //   //     var row = tbody.append("tr");
-          
-    //   //     Object.values(alldata).forEach((value) => {
-  
-    //   //         row.append("td").text(value);
-              
-    //   //     })
-    //   //  });
-    //   }
-
-    //   return true;
-    //   });
-     
-      
-};
-
-
+    // });      
